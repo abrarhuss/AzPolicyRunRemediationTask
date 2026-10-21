@@ -49,6 +49,21 @@ Supply both `-Scope` and `-ScopeId`, or omit both to retain the assignment scope
 | `ResourceGroup` | `/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>` |
 | `Resource` | `/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/<namespace>/<resource-type>/<resource-name>` |
 
+For example, remediate an assignment at a management group scope:
+
+```powershell
+.\Start-PolicyRemediationTask.ps1 `
+    -TenantId '00000000-0000-0000-0000-000000000000' `
+    -PolicyAssignmentId '/providers/Microsoft.Management/managementGroups/my-management-group/providers/Microsoft.Authorization/policyAssignments/my-assignment' `
+    -Scope ManagementGroup `
+    -ScopeId '/providers/Microsoft.Management/managementGroups/my-management-group' `
+    -WhatIf
+```
+
+Replace `my-management-group` with the management group ID, not its display
+name, and `my-assignment` with the assignment name. Remove `-WhatIf` after
+reviewing the preview to submit remediation tasks.
+
 For example, remediate a subscription assignment in just one resource group:
 
 ```powershell
@@ -80,6 +95,22 @@ For policies that need a running VM (for example, VM extension deployments), use
     -PolicyAssignmentId '<full-assignment-resource-id>' `
     -StartStopVMs YES
 ```
+
+To use the same VM start/restore behavior for a management group assignment:
+
+```powershell
+.\Start-PolicyRemediationTask.ps1 `
+    -TenantId '00000000-0000-0000-0000-000000000000' `
+    -PolicyAssignmentId '/providers/Microsoft.Management/managementGroups/my-management-group/providers/Microsoft.Authorization/policyAssignments/my-assignment' `
+    -Scope ManagementGroup `
+    -ScopeId '/providers/Microsoft.Management/managementGroups/my-management-group' `
+    -StartStopVMs YES `
+    -WhatIf
+```
+
+Replace the placeholder tenant, management group, and assignment values.
+Remove `-WhatIf` after reviewing the preview to start eligible VMs, wait for
+remediation, and restore their original power states as described below.
 
 - `-StartStopVMs` accepts `YES` or `NO` (default). `NO` preserves the original
   submit-only behavior and does not read or change VM power states.
