@@ -22,7 +22,7 @@ restores their original power states. NO (default) only submits remediation.
 .EXAMPLE
 .\Start-PolicyRemediationTask.ps1 -TenantId '<tenant-id>' -PolicyAssignmentId '<full-assignment-resource-id>' -Scope ResourceGroup -ScopeId '/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>' -WhatIf
 .EXAMPLE
-.\Start-PolicyRemediationTask.ps1  -TenantId '<tenant-id>' -PolicyAssignmentId '<full-assignment-resource-id>' -Scope 'ManagementGroup' -ScopeId '/providers/Microsoft.Management/managementGroups/<management-group-name>' -StartStopVMs 'YES'
+.\Start-PolicyRemediationTask.ps1 -TenantId '<tenant-id>' -PolicyAssignmentId '<full-assignment-resource-id>' -Scope 'ManagementGroup' -ScopeId '/providers/Microsoft.Management/managementGroups/<management-group-name>' -StartStopVMs 'YES'
 .EXAMPLE
 .\Start-PolicyRemediationTask.ps1 -TenantId '<tenant-id>' -PolicyAssignmentId '<full-assignment-resource-id>' -StartStopVMs 'YES'
 #>
